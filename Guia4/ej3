@@ -1,0 +1,3 @@
+sum(//Concept/@value) div count(//Concept)
+No puedo agrupar de esa manera con XPath
+count(//Source)

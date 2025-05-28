@@ -1,0 +1,53 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="mails">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="mail" type="mailT" maxOccurs="unbounded" ></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+    <xs:complexType name="mailT" mixed="true" >
+            <xs:sequence>
+                <xs:element name="date" type="xs:date"/>
+                <xs:element name="header" type="headerT"/>
+                <xs:element name="securityCode" type="alphaNum10" />
+                <xs:element name="subject" type="xs:string"/>
+                <xs:element name="body" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="identifier" type="xs:ID" use="optional"/>
+            <xs:attribute name="replyof" type="xs:IDREF" use="optional"/>
+        </xs:complexType> 
+    <xs:complexType name="headerT">
+            <xs:sequence>
+                <xs:element name="from" type="addressT2"/>
+                <xs:element name="to" type="addressT2" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="encoding" type="codeT" default="UTF-8" />
+            <xs:attribute name="client" use="optional" type="xs:string"/>
+    </xs:complexType>
+    <xs:simpleType name="addressT">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z]+@[a-z].[a-z]"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="addressT2">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="address" type="addressT"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="codeT">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="UTF-8"/>
+            <xs:enumeration value="UTF-16"/>
+            <xs:enumeration value="ISO-8859-1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="alphaNum10">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-z]{10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

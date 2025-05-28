@@ -1,0 +1,34 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="rss">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="channel" type="channel"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="channel">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="link" type="xs:anyURI"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="pubDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="webMaster" type="xs:string"/>
+            <xs:element name="language">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="es-ar"/>
+                        <xs:enumeration value="en-us"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="item" type="itemT" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="itemT">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="link" type="xs:anyURI"/>
+            <xs:element name="pubDate" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

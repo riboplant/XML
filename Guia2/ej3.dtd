@@ -1,0 +1,14 @@
+<!ELEMENT emails (email)*>
+<!ELEMENT  email (#PCDATA|date|header|subject|body)*>
+<!ATTLIST email id ID #IMPLIED
+                replyof IDREF #IMPLIED>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT  header (from,to+)>
+<!ELEMENT  from (name,address)>
+<!ELEMENT to (name,address)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ATTLIST header encoding (UTF-8|UTF-16|ISO-8859-1) "UTF-8"
+                 client CDATA #REQUIRED>
+<!ELEMENT subject (#PCDATA)>
+<!ELEMENT body (#PCDATA)>

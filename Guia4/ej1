@@ -1,0 +1,5 @@
+/APML/Body/Profile/@name
+/APML/Body/Profile [@name = "Home"]//Concepts/Concept/@key
+/APML/Body/Profile//Concepts/Concept/@key
+//Source/@updated
+//Profile [ count(ImplicitData/*) = 0 ]/@name

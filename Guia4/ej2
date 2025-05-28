@@ -1,0 +1,4 @@
+//Concept [@key = "business" ]
+//Concept [@value >= 0.95 ]
+//Profile [ count(*/Concepts/Concept) < count(..//Concepts/Concept) div count(../Profile)  ]/@name
+//Concept/@key [starts-with(. , "a") or starts-with(. , "i") or starts-with(. , "e") or starts-with(. , "o") or starts-with(. , "u")]

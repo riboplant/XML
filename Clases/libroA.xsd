@@ -1,0 +1,47 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="libro">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="titulo" type="tituloT"/>
+                <xsd:element name="listaautores" type="listaT"/>
+                <xsd:element name="editorial" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="tituloT">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="ISBN" type="intR"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="listaT">
+        <xsd:sequence>
+            <xsd:element name="autor" type="xsd:string" maxOccurs="5"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="intR">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="1"/>
+            <xsd:maxInclusive value="20"></xsd:maxInclusive>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="tituloT2">
+        <xsd:simpleContent>
+            <xsd:restriction base="tituloT">
+                <xsd:minLength value="1"></xsd:minLength>
+                <xsd:maxLength value="10"/>
+                <xsd:whiteSpace value="collapse"/>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="listaT2">
+        <xsd:complexContent>
+            <xsd:extension base="listaT">
+                <xsd:sequence>
+                    <xsd:element name="ciudad"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+</xsd:schema>

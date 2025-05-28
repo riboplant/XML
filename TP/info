@@ -1,0 +1,22 @@
+KEY
+xrbr4d7jguscwkdg7hu393gt
+
+GET seasons
+curl -X GET "https://api.sportradar.us/rugby-league/trial/v3/en/seasons.xml?api_key={$API_KEY}"
+
+GET season-info
+curl -X GET "https://api.sportradar.us/rugby-league/trial/v3/en/seasons/sr:season:59618/info.xml?api_key={$API_KEY}"
+es un ejemplo, el sr:season:xxxxx es lo que debemos variar segun el que tengamos
+
+
+GET season-lineups
+curl -X GET "https://api.sportradar.us/rugby-league/trial/v3/en/seasons/sr:season:59618/lineups.xml?api_key={API_KEY}"
+al igual que season-info, pedimos segun sr:season:xxxx
+
+Recibimos prefijo y ano ->(Season) obtenemos nombre y headers 1,2 y nos quedamos con el id (sr:season:xxxx) de la season
+con esta id ->(Season-Info y Season-Lineups) 
+
+El trabajo esta en recorrer el season-lineups, hacer nodos equipo con su data y una lista de players
+esta lista de players debe ser actualizada por partido, agregando los jugadores sin partidos anteriormente
+y actualizando los valores de un contador de paritdos jugados de cada jugador. Con esta variable de partidos jugados 
+es que luego vamos a ordenar como pide la consigna.

@@ -1,0 +1,165 @@
+1.1: t1: le faltan coordenadas y el identificador
+     t2: le falta pais y el identificador
+1.2: OK pues minOccurs de tweets esta en 0
+1.3: no puede haber un tweet vacio
+1.4: t1: le faltan las coordenadas
+     t2: la coordenada Y es menor a -90
+1.5: le falta el identificador y las coordenadas no pueden estar vacias
+
+2.1 
+<xsd:simpleType name="userT">
+  <xsd:restriction base="xsd:String">
+    <xsd:pattern value="@[a-zA-Z0-9]*"/>
+    <xsd:maxLength value="16" />
+  </xsd:restriction>
+</xsd:simpleType>
+
+2.2
+<xsd:complexType name="twC">
+  <xsd:complexContent>
+    <xsd:extension base="twType">
+      <xsd:sequence>
+        <xsd:element name="Fav" type="xsd:positiveInteger"/>
+        <xsd:element name="Rt" type="xsd:positiveInteger"/>
+      </xsd:sequence>
+    </xsd:extension>
+  </xsd:complexContent>
+</xsd:complexType>
+
+3.1
+las validaciones que no puede hacer en este caso un dtd son:
+  validar que tenga un solo telefono y validar que sea residencial o celularquiero decir que podria verificar que haya uno solo pero no ambas
+validar que los asientos vayan del 1-A al 45-F pues no son atributos si no elementos
+Tampoco puede verificar que haya un minimo de 15 pasajeros
+
+3.2
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  
+  <xsd:element name="flight">
+    <xsd:sequence>
+      <xsd:element name="departure" type="xsd:date"/>
+      <xsd:element name="passangers" type="passangersT"/>
+    </xsd:sequence>
+    <xsd:attribute name="code" type="xsd:ID"/>
+  </xsd:element>
+
+  <xsd:key name="personK">
+    <xsd:selector xpath="./flight/passangers/person"/>
+    <xsd:field xpath="@id"/>
+  </xsd:key>
+
+  <xsd:complexType name="passangersT">
+    <xsd:sequence>
+      <xsd:element name="person" type="personT" minOccurs="15"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="personT">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:String"/>
+      <xsd:element name="seat" type="seatT"/>
+      <xsd:element name="telephone" type="telephoneT"/>
+      <xsd:element name="specialFood" type="xsd:String" minOccurs="0">
+    </xsd:sequence>
+    <xsd:attribute name="id" type="ID"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="seatT">
+    <xsd:sequence>
+      <xsd:element name="number">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd: minInclusive="1" maxInclusive="45"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="position">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:String">
+            <xsd:pattern value="[A-F]"/>
+            <xsd:length value="1"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:simpleType name="telephoneT">
+    <xsd:restriction base="xsd:String">
+      <xsd:pattern value="%d{2}-%d{4}-%d{4} or %d{4}-%d{4}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>
+
+4.1
+
+
+4.3
+Un arbol donde del root nacen el nodo flights que es el pedido y tambien nodos person con un key y luego del flights nacen una cantidad indeterminada de nodos flight que poseen passangers. Estos passangers tienen elementos person los cuales se referencian por un id con keyref a las keys definidas anteriormente
+
+5.1
+./info/clientes/cliente[../../cuentas/cuenta/@cliente = ./@id and ../../cuentas/cuenta/tipo = "cuenta corriente"]/nombre
+
+5.2
+./info/transacciones/transaccion[./fecha = "2014/08/01" and tipo="deposito"]/@cuenta
+
+5.3
+caja de ahorro, cuenta corriente * 2, extraccion * 3, deposito *3 = 9
+
+5.4
+Obtenemos los nombres de los clientes cuyos ingresos anuales son menores al promedio de los ingresos anuales de todos los clientes, en este caso el promedio es de (200000 + 250000 + 130000) / 3 = 580000 / 3 = 193333,33
+Entonces el unico cliente que cumple la condicion es el que tiene nombre: Marina
+
+6-1
+falta el elemento getResultRequest
+
+6.2
+en authRequest el orden del sequence es incorrecto ademas de que falta partner. Nuevamente falta el elemento getResultRequest
+
+6.3
+falta el elemento authRequest
+
+6.4
+falta el elemento runReportRequest
+
+7.1
+<xsd:simpleType name="unidadT">
+  <xsd:restriction base="xsd:String">
+    <xsd:pattern value="KB"/>
+    <xsd:pattern value="MB"/>
+  </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="pageSize">
+  <xsd:restriction base="xsd:int">
+    <xsd:minInclusive value="0"/>
+    <xsd:maxInclusive value="1024"/>
+  </xsd:restriction>
+  <xsd:attribute name="unidad" use="optional" type="unidadT"/>
+<xsd:complexType>
+
+8.1
+<!ELEMENT pelicula (titulo, estreno, (director, actores)?)>
+<!ATTLIST pelicula identif CDATA #REQUIRED>
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT estreno (#PCDATA)>
+<!ELEMENT director (nombre,fechaNacimiento,salario)>
+<!ELEMENT actores (actor*)>
+<!ELEMENT actor (nombre, fechaNacimiento, salario, personaje)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT fechaNacimiento (#PCDATA)>
+<!ELEMENT personaje (#PCDATA)>
+<!ELEMENT salario (#PCDATA)>
+<!ATTLIST salario moneda (Pesos|USD) #REQUIRED>
+
+9.1
+<!ELEMENT song (band, album, year, track?, author+)>
+<!ELEMENT band #PCDATA>
+<!ELEMENT album #PCDATA>
+<!ELEMENT year #PCDATA>
+<!ELEMENT track #PCDATA>
+<!ELEMENT author #PCDATA>
+
+

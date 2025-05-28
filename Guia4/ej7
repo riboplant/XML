@@ -1,0 +1,2 @@
+//Profile[not(./@name = preceding :: Profile/@name)]/@name
+/APML/Body/Profile[@name="Home"]/*/Concepts/Concept[not(./@key = preceding-sibling :: */@key)]

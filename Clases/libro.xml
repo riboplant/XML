@@ -1,0 +1,9 @@
+<libro xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="libroA.xsd">
+    <titulo ISBN="18">XML Complete</titulo>
+    <listaautores>
+        <autor>Holzer</autor>
+        <autor>Arena</autor>
+        <ciudad>CABA</ciudad>
+    </listaautores>
+</libro>

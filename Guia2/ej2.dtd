@@ -1,0 +1,12 @@
+<!ELEMENT emails (email)*>
+<!ELEMENT  email (date,header,subject,body)>
+<!ATTLIST email id ID #IMPLIED
+                replyof IDREF #IMPLIED>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT  header (from,to)>
+<!ELEMENT  from (name,address)>
+<!ELEMENT to (name,address)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT subject (#PCDATA)>
+<!ELEMENT body (#PCDATA)>

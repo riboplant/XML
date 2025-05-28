@@ -1,0 +1,16 @@
+<!DOCTYPE libro[
+    <!ELEMENT libro (titulo,listaautores,editorial)>
+    <!ELEMENT titulo (#PCDATA)>
+    <!ELEMENT listaautores (autor,autor?,autor?,autor?,autor?)>
+    <!ELEMENT editorial (#PCDATA)>
+    <!ELEMENT autor (#PCDATA)>
+]>
+
+<libro>
+    <titulo> Prueba de libro</titulo>
+    <listaautores>
+        <autor>Autor Obligatorio</autor>
+        <autor>Autor Opcional</autor>
+    </listaautores>
+    <editorial/>
+</libro>

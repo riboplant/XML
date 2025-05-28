@@ -1,0 +1,13 @@
+<!ELEMENT rss (channel)>
+<!ATTLIST rss version (0.9.1|0.9|1.0|2.0) #REQUIRED>
+<!ELEMENT channel (title,link,description,language?,pubDate?,webMaster?,item*)>
+<!-- 
+<!ATTLIST channel language (es-ar|en-us) #IMPLIED> 
+-->
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT link (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT language (#PCDATA)>
+<!ELEMENT pubDate (#PCDATA)>
+<!ELEMENT webMaster (#PCDATA)>
+<!ELEMENT item (title,link,pubDate)>
